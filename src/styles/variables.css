@@ -1,0 +1,20 @@
+:root {
+  --gold: #D4AF37;
+  --gold-light: #E8C84A;
+  --gold-pale: #F5E88A;
+  --gold-dim: #8B7220;
+  --obsidian: #0C0C0E;
+  --obsidian-2: #111116;
+  --obsidian-3: #16161E;
+  --obsidian-4: #1E1E2A;
+  --ivory: #F5F0E8;
+  --ivory-dim: #C8C0B0;
+  --ivory-muted: #7A7468;
+  --accent-blue: #3B6FD4;
+  --accent-emerald: #1A8A6A;
+  --card-bg: rgba(255,255,255,0.03);
+  --card-border: rgba(212,175,55,0.15);
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+}
