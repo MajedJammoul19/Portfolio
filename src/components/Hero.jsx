@@ -121,7 +121,7 @@ function Hero() {
                 {/* Replace the src with your image path */}
                 <img 
                   src={profilePhoto}
-                  alt="Majed Jammoul" 
+                  alt="Majed Jammoul image" 
                   className="w-full h-full object-cover"
                 />
                 
