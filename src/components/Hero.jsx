@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import cvFile from '../assets/cv_professional.docx' // Import your CV file
-
+import profilePhoto from '../assets/profile-photo.jpg'
 function Hero() {
   useEffect(() => {
     const sequence = [
@@ -120,7 +120,7 @@ function Hero() {
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-gold/30 shadow-[0_0_60px_rgba(212,175,55,0.15)]">
                 {/* Replace the src with your image path */}
                 <img 
-                  src='/src/assets/profile-photo.jpg'
+                  src={profilePhoto}
                   alt="Majed Jammoul" 
                   className="w-full h-full object-cover"
                 />
