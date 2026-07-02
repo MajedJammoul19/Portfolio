@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [goldLink, setGoldLink] = useState(null) // tracks which nav link's text should be gold (sticky on hover)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,18 +21,21 @@ function Navbar() {
     setIsMobileMenuOpen(false)
   }
 
-  // Handle CV download
   const handleDownloadCV = () => {
-    // Create a link element
     const link = document.createElement('a')
-    // Path to CV file in public folder
     link.href = '/cv_professional.docx'
-    // Name the file will be saved as
     link.download = 'Majed_Maher_Jammoul_CV.docx'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
   }
+
+  const navLinks = [
+    { key: 'about', href: '#about', label: 'About' },
+    { key: 'stack', href: '#stack', label: 'Stack' },
+    { key: 'projects', href: '#projects', label: 'Projects' },
+    { key: 'contact', href: '#contact', label: 'Contact' },
+  ]
 
   return (
     <>
@@ -47,42 +51,20 @@ function Navbar() {
         </a>
         
         <ul className="hidden md:flex gap-8 list-none">
-          <li>
-            <a 
-              href="#about" 
-              className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 hover:text-gold relative 
-                after:content-[''] after:absolute after:-bottom-0-5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#stack" 
-              className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 hover:text-gold relative 
-                after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Stack
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#projects" 
-              className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 hover:text-gold relative 
-                after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Projects
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#contact" 
-              className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 hover:text-gold relative 
-                after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Contact
-            </a>
-          </li>
+          {navLinks.map(({ key, href, label }) => (
+            <li key={key}>
+              <a 
+                href={href}
+                onMouseEnter={() => setGoldLink(key)}
+                onClick={() => setGoldLink(key)}
+                style={{ color: goldLink === key ? '#D4AF37' : undefined }}
+                className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 relative 
+                  after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
         
         <button 
@@ -108,34 +90,21 @@ function Navbar() {
           isMobileMenuOpen ? 'flex' : 'hidden'
         }`}
       >
-        <a 
-          href="#about" 
-          onClick={closeMobileMenu} 
-          className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-gold transition-colors duration-300"
-        >
-          About
-        </a>
-        <a 
-          href="#stack" 
-          onClick={closeMobileMenu} 
-          className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-gold transition-colors duration-300"
-        >
-          Stack
-        </a>
-        <a 
-          href="#projects" 
-          onClick={closeMobileMenu} 
-          className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-gold transition-colors duration-300"
-        >
-          Projects
-        </a>
-        <a 
-          href="#contact" 
-          onClick={closeMobileMenu} 
-          className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-gold transition-colors duration-300"
-        >
-          Contact
-        </a>
+        {navLinks.map(({ key, href, label }) => (
+          <a 
+            key={key}
+            href={href}
+            onMouseEnter={() => setGoldLink(key)}
+            onClick={() => {
+              setGoldLink(key)
+              closeMobileMenu()
+            }}
+            style={{ color: goldLink === key ? '#D4AF37' : undefined }}
+            className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 transition-colors duration-300"
+          >
+            {label}
+          </a>
+        ))}
         <button 
           onClick={() => {
             handleDownloadCV()

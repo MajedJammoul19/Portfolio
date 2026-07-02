@@ -3,6 +3,7 @@ import ScrollReveal from './ScrollReveal'
 
 function TechStack() {
   const [activeTab, setActiveTab] = useState('frontend')
+  const [goldTab, setGoldTab] = useState('frontend') // tracks which label's text should be gold (sticky on hover)
 
   const tabs = {
     frontend: {
@@ -13,7 +14,6 @@ function TechStack() {
         { icon: '🎨', name: 'Tailwind CSS', level: 92 },
         { icon: '🔀', name: 'Redux', level: 85 },
         { icon: '🎭', name: 'Framer Motion', level: 80 },
-        
       ]
     },
     backend: {
@@ -25,7 +25,6 @@ function TechStack() {
         { icon: '🔐', name: 'JWT / OAuth', level: 88 },
         { icon: '🌐', name: 'REST APIs', level: 97 },
         { icon: '🔌', name: 'WebSockets', level: 80 },
-        
       ]
     },
     database: {
@@ -34,7 +33,6 @@ function TechStack() {
         { icon: '🍃', name: 'MongoDB', level: 95 },
         { icon: '🦭', name: 'MySQL', level: 80 },
         { icon: '🔷', name: 'Mongoose', level: 92 },
-        
       ]
     },
     tools: {
@@ -44,7 +42,6 @@ function TechStack() {
         { icon: '📦', name: 'Webpack/Vite', level: 85 },
         { icon: '🚀', name: 'Vercel/Netlify', level: 90 },
         { icon: '🚀', name: 'Render', level: 90 },
-        
       ]
     }
   }
@@ -62,14 +59,17 @@ function TechStack() {
 
         <div className="flex gap-0 mb-12 border-b border-gold/10 flex-wrap">
           {Object.entries(tabs).map(([key, tab]) => (
-            <button
+            <button 
               key={key}
               className={`px-6 py-3 bg-none border-none border-b-2 transition-all duration-300 text-[0.78rem] tracking-widest uppercase font-sans -mb-px font-medium ${
-                activeTab === key 
-                  ? 'text-gold border-gold' 
-                  : 'text-ivory-muted border-transparent hover:text-ivory'
+                activeTab === key ? 'border-gold' : 'border-transparent'
               }`}
-              onClick={() => setActiveTab(key)}
+              style={{ color: goldTab === key ? '#D4AF37' : '#9A9690' }}
+              onMouseEnter={() => setGoldTab(key)}
+              onClick={() => {
+                setActiveTab(key)
+                setGoldTab(key)
+              }}
             >
               {tab.label}
             </button>

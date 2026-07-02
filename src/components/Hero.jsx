@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import cvFile from '../assets/cv_professional.docx' // Import your CV file
+import cvFile from '../assets/cv_professional.docx' 
 import profilePhoto from '../assets/profile-photo.jpg'
 function Hero() {
   useEffect(() => {
@@ -25,12 +25,12 @@ function Hero() {
     })
   }, [])
 
-  // Handle CV download
+
   const handleDownloadCV = () => {
-    // Create a link element
+    
     const link = document.createElement('a')
     link.href = cvFile
-    link.download = 'Majed_Maher_Jammoul_CV.docx' // The name the file will be saved as
+    link.download = 'Majed_Maher_Jammoul_CV.docx' 
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -38,7 +38,7 @@ function Hero() {
 
   return (
     <section className="min-h-screen flex items-center px-8 md:px-8 relative overflow-hidden" id="hero">
-      {/* Background Effects */}
+
       <div className="absolute inset-0 pointer-events-none" style={{
         background: 'radial-gradient(ellipse 60% 50% at 70% 50%, rgba(212,175,55,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(59,111,212,0.04) 0%, transparent 60%)'
       }}></div>
@@ -50,9 +50,9 @@ function Hero() {
       }}></div>
       
       <div className="max-w-[1100px] mx-auto w-full pt-20 relative z-10">
-        {/* Two column layout for text and image */}
+  
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* Left side - Text content */}
+       
           <div className="flex-1">
             <div id="heroEyebrow" className="inline-flex items-center gap-3 text-[0.72rem] tracking-[0.25em] uppercase text-gold mb-6">
               <span className="w-[30px] h-px bg-gold/50"></span>
@@ -62,7 +62,7 @@ function Hero() {
             
             <h1 id="heroName" className="font-serif text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.02em] mb-4">
               <div>
-                <span className="shimmer-text">
+                <span>
                   Majed
                 </span>
               </div>
@@ -110,30 +110,24 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right side - Profile Image */}
           <div id="heroImage" className="flex-1 flex justify-center items-center opacity-0">
             <div className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px]">
-              {/* Glow effect behind image */}
+            
               <div className="absolute inset-0 rounded-full bg-gold/10 blur-3xl animate-pulse"></div>
               
-              {/* Image container with border glow */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-gold/30 shadow-[0_0_60px_rgba(212,175,55,0.15)]">
-                {/* Replace the src with your image path */}
+              
                 <img 
                   src={profilePhoto}
                   alt="Majed Jammoul image" 
                   className="w-full h-full object-cover"
                 />
-                
-                {/* Overlay gradient for effect */}
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian/20 to-transparent"></div>
               </div>
               
-              {/* Decorative rings */}
               <div className="absolute -inset-4 rounded-full border border-gold/10 animate-spin-slow"></div>
               <div className="absolute -inset-8 rounded-full border border-gold/5 animate-spin-slower"></div>
-              
-              {/* Small decorative dots */}
+    
               <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gold/40"></div>
               <div className="absolute -bottom-2 -left-2 w-3 h-3 rounded-full bg-gold/30"></div>
             </div>
