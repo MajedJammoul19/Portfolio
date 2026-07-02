@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [goldLink, setGoldLink] = useState(null) // tracks which nav link's text should be gold (sticky on hover)
+  const [goldLink, setGoldLink] = useState(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,59 +39,71 @@ function Navbar() {
 
   return (
     <>
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-1000 px-8 h-17 flex items-center justify-between backdrop-blur-[20px] border-b border-gold/10 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-obsidian/95' 
-            : 'bg-obsidian/70'
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[1000] px-4 sm:px-8 h-[4.25rem] flex items-center justify-between backdrop-blur-[20px] border-b border-[#D4AF37]/10 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0a0a0a]/95'
+            : 'bg-[#0a0a0a]/70'
         }`}
       >
-        <a href="#hero" className="font-serif text-2xl font-bold text-gold tracking-wider no-underline">
-          M<span className="text-ivory font-light">.</span>Dev
+        <a href="#hero" className="font-serif text-2xl font-bold text-[#D4AF37] tracking-wider no-underline">
+          M<span className="text-[#fdfdfd] font-light">.</span>Dev
         </a>
-        
+
+        {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-8 list-none">
           {navLinks.map(({ key, href, label }) => (
             <li key={key}>
-              <a 
+              <a
                 href={href}
                 onMouseEnter={() => setGoldLink(key)}
                 onClick={() => setGoldLink(key)}
                 style={{ color: goldLink === key ? '#D4AF37' : undefined }}
-                className="text-ivory-dim no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 relative 
-                  after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                className="text-[#c9c9c9] no-underline text-[0.8rem] font-normal tracking-[0.12em] uppercase transition-colors duration-300 relative 
+                  after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-[#D4AF37] after:transition-all after:duration-300 hover:after:w-full"
               >
                 {label}
               </a>
             </li>
           ))}
         </ul>
-        
-        <button 
+
+        {/* Desktop Download CV Button */}
+        <button
           onClick={handleDownloadCV}
-          className="hidden md:inline-block px-5 py-[0.45rem] border border-gold text-gold no-underline text-[0.75rem] tracking-widest uppercase rounded-[3px] transition-all duration-300 font-medium hover:bg-gold hover:text-obsidian cursor-pointer"
+          className="hidden md:inline-block px-5 py-[0.45rem] border border-[#D4AF37] text-[#D4AF37] no-underline text-[0.75rem] tracking-widest uppercase rounded-[3px] transition-all duration-300 font-medium hover:bg-[#D4AF37] hover:text-[#0a0a0a] cursor-pointer"
         >
           Download CV
         </button>
-        
-        <button 
-          className="flex flex-col gap-1.25 cursor-pointer border-none bg-transparent p-1 md:hidden"
+
+        <button
+          className="flex flex-col gap-1.5 cursor-pointer border-none bg-transparent p-2 md:hidden z-50"
           onClick={toggleMobileMenu}
           aria-label="Open menu"
         >
-          <span className="w-5.5 h-[1.5px] bg-ivory transition-all duration-300 block"></span>
-          <span className="w-5.5 h-[1.5px] bg-ivory transition-all duration-300 block"></span>
-          <span className="w-5.5 h-[1.5px] bg-ivory transition-all duration-300 block"></span>
+          {/* Line 1 */}
+          <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 block ${
+            isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+          }`}></span>
+          {/* Line 2 */}
+          <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 block ${
+            isMobileMenuOpen ? 'opacity-0' : ''
+          }`}></span>
+          {/* Line 3 */}
+          <span className={`w-6 h-0.5 bg-[#D4AF37] transition-all duration-300 block ${
+            isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+          }`}></span>
         </button>
       </nav>
-      
-      <div 
-        className={`fixed top-17 left-0 right-0 bg-obsidian/97 backdrop-blur-[20px] px-8 py-6 border-b border-gold/10 z-999 flex-col gap-5 transition-all duration-300 md:hidden ${
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-[4.25rem] left-0 right-0 bg-[#0a0a0a]/97 backdrop-blur-[20px] px-8 py-6 border-b border-[#D4AF37]/10 z-[999] flex-col gap-5 transition-all duration-300 md:hidden ${
           isMobileMenuOpen ? 'flex' : 'hidden'
         }`}
       >
         {navLinks.map(({ key, href, label }) => (
-          <a 
+          <a
             key={key}
             href={href}
             onMouseEnter={() => setGoldLink(key)}
@@ -100,17 +112,17 @@ function Navbar() {
               closeMobileMenu()
             }}
             style={{ color: goldLink === key ? '#D4AF37' : undefined }}
-            className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 transition-colors duration-300"
+            className="text-[#c9c9c9] no-underline text-[0.85rem] tracking-widest uppercase py-2 transition-colors duration-300 hover:text-[#D4AF37]"
           >
             {label}
           </a>
         ))}
-        <button 
+        <button
           onClick={() => {
             handleDownloadCV()
             closeMobileMenu()
           }}
-          className="text-ivory-dim no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-gold transition-colors duration-300 text-left bg-transparent border-none cursor-pointer"
+          className="text-[#c9c9c9] no-underline text-[0.85rem] tracking-widest uppercase py-2 hover:text-[#D4AF37] transition-colors duration-300 text-left bg-transparent border-none cursor-pointer"
         >
           Download CV
         </button>
